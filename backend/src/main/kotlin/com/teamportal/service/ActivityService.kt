@@ -18,13 +18,13 @@ class ActivityService(
     private val formatter = DateTimeFormatter.ofPattern("M/d/yyyy, h:mm:ss a")
 
     fun getFeedActivities(): List<ActivityDTO> {
-        val activities = activityRepository.findAll()
+        val activities = activityRepository.findFeedActivities()
 
         return activities.map { activity ->
             ActivityDTO(
                 id = activity.id,
                 action = activity.action,
-                timestamp = activity.timestamp.format(formatter),
+                timestamp = activity.timestamp!!.format(formatter),
                 userName = activity.user?.name
             )
         }
